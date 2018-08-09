@@ -1,4 +1,4 @@
-const { resCode } = require('../../../config/message.map')
+const { RESCODE } = require('../../../config/message.map')
 const adminUserHelper = require('../../../app/api/dbhelper/admin-user-helper')
 const { createToken } = require('../../../middleware/token/token')
 const { decrypted } = require('../../../middleware/rsa/rsa')
@@ -12,16 +12,16 @@ let adminLogin = async (ctx, next) => {
             ctx.body = {
                 token: token,
                 userName: dbResult.adminUser,
-                resCode: resCode.loginCode.success,
+                resCode: RESCODE.LOGINCODE.success,
             }
         } else {
             ctx.body = {
-                resCode: resCode.loginCode.error['密码错误'],
+                resCode: RESCODE.LOGINCODE.error['密码错误'],
             }
         }
     } else {
         ctx.body = {
-            resCode: resCode.loginCode.error['暂无用户'],
+            resCode: RESCODE.LOGINCODE.error['暂无用户'],
         }
     }
 }
@@ -30,12 +30,12 @@ let getUserAvater = async (ctx, next) => {
         dbResult = await adminUserHelper.findOne({ adminUser });
     if (dbResult) {
         ctx.body = {
-            resCode: resCode.loginCode.success,
+            resCode: RESCODE.LOGINCODE.success,
             avater: dbResult.userInfo.avater
         }
     } else {
         ctx.body = {
-            resCode: resCode.loginCode.error['暂无用户'],
+            resCode: RESCODE.LOGINCODE.error['暂无用户'],
         }
     }
 }

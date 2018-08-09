@@ -2,7 +2,7 @@
 const router = require('koa-router')()
 const api = require('../app/api/controllers/login')
 const token = require('../middleware/token/token')
-const { decrypted, sendPubKey } = require('../middleware/rsa/rsa')
+const { createRsa, sendPubKey } = require('../middleware/rsa/rsa')
 const { cap1 } = require('../middleware/ccap/ccap')
 router.prefix('/api/a')
 router.get('/', token.checkToken, async (ctx, next) => {
@@ -14,6 +14,8 @@ router.get('/', token.checkToken, async (ctx, next) => {
 router.post('/login', api.adminLogin)
 // 获取用户头像
 router.get('/avaimg', api.getUserAvater);
+// 更换秘钥
+router.get('/creatersa', createRsa);
 // 发送公钥
 router.get('/pubkey', sendPubKey);
 module.exports = router

@@ -1,5 +1,6 @@
 const NodeRSA = require('node-rsa')
 const fs = require('fs')
+const { RESCODE } = require('../../config/message.map')
 const PUBLICKEY = 'pubKey.pem'
 const PRIVATEKEY = 'pravKey.pem'
 // 生成Rsa并写入到文件中
@@ -10,25 +11,39 @@ let createRsa = async (ctx, next) => {
     let pubKey = key.exportKey('pkcs8-public');
     // 私钥
     let pravKey = key.exportKey('pkcs8-private');
-    fs.writeFile(PUBLICKEY, pubKey, function (err) {
-        if (err) console.log(err);
-        else console.log('写文件操作成功');
-    });
-    fs.writeFile(PRIVATEKEY, pravKey, function (err) {
-        if (err) console.log(err);
-        else console.log('写文件操作成功');
-    });
-    ctx.body = {
-        pubKey: pubKey
+    let rescode = '';
+    let pubKeyIsChange = await writeKey(PUBLICKEY, pubKey);
+    let pravKeyIsChange = await writeKey(PRIVATEKEY, pravKey);
+    if (pubKeyIsChange && pravKeyIsChange) {
+        rescode = RESCODE.RSACODE['修改秘钥'].success
+    } else {
+        rescode = RESCODE.RSACODE['修改秘钥'].error
     }
-    await next();
+    ctx.body = {
+        rescode: rescode
+    }
+    // await next();
+}
+// 将秘钥写入文件
+let writeKey = function (file, content) {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(file, content, (err) => {
+            if (err) {
+                console.log(err)
+                reject(0);
+            }
+            else {
+                resolve(1);
+            }
+        });
+    })
 }
 // 从文件中读出公钥或者私钥
 let getKey = function (file) {
     return new Promise((resolve, reject) => {
         fs.readFile(file, (err, data) => {
             if (err) {
-                reject(err);
+                reject(RESCODE.RSACODE['获取公钥'].error);
             } else {
                 resolve(data.toString());
             }
