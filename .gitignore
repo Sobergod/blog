@@ -1,3 +1,5 @@
+pubKey.pem
+pravKey.pem
 # Logs
 logs
 *.log
