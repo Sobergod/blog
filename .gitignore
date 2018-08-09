@@ -1,4 +1,4 @@
-.pem
+*.pem
 package-lock.json
 # Logs
 logs
