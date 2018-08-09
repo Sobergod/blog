@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= title %></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <p>用户注册</p>
+    <form action="/register/a" method="post">
+        <div>
+            <span>用户名:</span>
+            <input type="text" name="userName" value="">
+        </div>
+        <div>
+            <span>邮箱:</span>
+            <input type="email" name="userEmail">
+        </div>
+        <div>
+            <span>电话:</span>
+            <input type="number" name="userPhone">
+        </div>
+        <div>
+            <span>密码:</span>
+            <input type="password" name="userPassWord" value="">
+        </div>
+        <div>
+            <span>确认密码:</span>
+            <input type="password" name="" value="">
+        </div>
+        <div>
+            <span>性别:</span>
+            <input type="radio" name="userGender" checked="checked" value="male" id="male">
+            <label for="male">男</label>
+            <input type="radio" name="userGender" value="female" id="female">
+            <label for="female">女</label>
+        </div>
+        <div>
+            <span>年龄:</span>
+            <input type="text" name="userAge" value="">
+        </div>
+        <button type="submit">提交</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1> <span>用户名:</span><%= title %></h1>
+    <p>Welcome  <%= title %></p>
+    <div>
+      <span>去注册</span>
+      <a href="/register">注册</a>
+    </div>
+    <form action='/login' method='post' >
+      <input type="text" name="userName" value="">
+      <input type="text" name="userPassWord" value="">
+      <button type="submit">提交</button>
+    </form>
+  </body>
+</html>
