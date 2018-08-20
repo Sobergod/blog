@@ -5,13 +5,12 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const db = require('./server/db/db.js')
-const config = require('./config/config.js')
 const index = require('./routes/index.router')
 const users = require('./routes/users.router')
 const apis = require('./routes/api.router')
 const register = require('./routes/register.router')
 const cors = require('koa2-cors')//解决跨域访问
+require('./server/db/db')
 app.use(cors())
 
 // error handler
@@ -39,7 +38,7 @@ app.use(async (ctx, next) => {
 })
 
 // mongodb 
-db.connect(config.env.MONGO.host)
+
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())

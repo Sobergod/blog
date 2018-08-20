@@ -1,5 +1,6 @@
 const config = require('../../config/config.js')
 const mongoose = require('mongoose')
+mongoose.connect(config.env.MONGO.host)
 /**
  * 连接成功
  */
@@ -20,5 +21,3 @@ mongoose.connection.on('error', err => {
 mongoose.connection.on('disconnected', () => {
     console.log('Mongoose connection disconnected')
 })
-
-module.exports = mongoose
