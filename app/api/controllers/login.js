@@ -1,6 +1,5 @@
 const { RESCODE } = require('../../../config/message.map')
 const adminUserHelper = require('../../../app/api/dbhelper/admin-user-helper')
-const { createToken } = require('../../../middleware/token/token')
 const { decrypted } = require('../../../middleware/rsa/rsa')
 let adminLogin = async (ctx, next) => {
     let adminUser = ctx.request.body.user;
@@ -8,9 +7,8 @@ let adminLogin = async (ctx, next) => {
     let dbResult = await adminUserHelper.findOne({ adminUser });
     if (dbResult) {
         if (dbResult.password === password) {
-            let token = createToken(dbResult.id)
             ctx.body = {
-                token: token,
+                token: ctx.state.token,
                 userName: dbResult.adminUser,
                 resCode: RESCODE.LOGINCODE.success,
             }
