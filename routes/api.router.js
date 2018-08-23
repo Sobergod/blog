@@ -1,7 +1,8 @@
 // 所有后台接口路由
 
 const router = require('koa-router')()
-const api = require('../app/api/controllers/login')
+const login = require('../app/api/controllers/login')
+const register = require('../app/api/controllers/register')
 const token = require('../middleware/token/token')
 const { createRsa, sendPubKey } = require('../middleware/rsa/rsa')
 // const { cap1 } = require('../middleware/ccap/ccap')
@@ -14,9 +15,10 @@ router.get('/', token.checkToken, async (ctx, next) => {
     }
 })
 // 登录
-router.post('/login', token.createToken, api.adminLogin)
+router.post('/login', token.createToken, login.adminLogin);
+router.post('/register', register.adminRegister);
 // 获取用户头像
-router.get('/avaimg', api.getUserAvater);
+router.get('/avaimg', login.getUserAvater);
 // 更换秘钥
 router.get('/creatersa', createRsa);
 // 发送公钥

@@ -14,6 +14,7 @@ let RESCODE = {
         success: {
             status: 'login ok',
             code: 1001,
+            tipMsg: '登录成功',
         },
         error: {
             '暂无用户': {
@@ -31,8 +32,24 @@ let RESCODE = {
     },
     // 注册成功码
     REGISTERCODE: {
-        status: 'register ok',
-        code: 1002
+        success: {
+            status: 'register ok',
+            code: 1002,
+            tipMsg: '注册成功',
+        },
+        error: {
+            '用户存在': {
+                status: 'login fail',
+                code: 1061,
+                tipMsg: '用户已存在',
+            },
+            '其他错误': {
+                status: 'login fail',
+                code: 1062,
+                tipMsg: '注册失败',
+            }
+        }
+
     },
     // 秘钥相关码
     RSACODE: {
